@@ -45,15 +45,18 @@ describe("WordleBoard", () => {
 	});
 
 	describe("Rules for defining the word of the day", () => {
-		test("If a word of the day provided does not have exactly 5 characters, a warning is emitted", async () => {
-			// const spy = vi.spyOn(console, "warn");
-			// spy.mockImplementation(() => null);
-			console.warn = vi.fn();
+		test.each(["FLY", "tests", "QWERT"])(
+			"If '%s' a warning is emitted",
+			async (wordOfTheDay) => {
+				// const spy = vi.spyOn(console, "warn");
+				// spy.mockImplementation(() => null);
+				console.warn = vi.fn();
 
-			mount(WordleBoard, { props: { wordOfTheDay: "FLY" } });
+				mount(WordleBoard, { props: { wordOfTheDay: wordOfTheDay } });
 
-			expect(console.warn).toHaveBeenCalled();
-		});
+				expect(console.warn).toHaveBeenCalled();
+			}
+		);
 
 		test("if the word of the day is not all in uppercase, a warning is emitted", async () => {
 			console.warn = vi.fn();
