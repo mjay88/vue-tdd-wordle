@@ -4,9 +4,12 @@ import { VICTORY_MESSAGE, DEFEAT_MESSAGE } from "@/settings";
 
 describe("WordleBoard", () => {
 	let wordOfTheDay = "TESTS";
+	let wrapper: ReturnType<typeof mount>;
+	beforeEach(() => {
+		wrapper = mount(WordleBoard, { props: { wordOfTheDay } });
+	});
 	test("a victory message appears when the user makes a guess that matches the word of the day", async () => {
 		//Arrange
-		const wrapper = mount(WordleBoard, { props: { wordOfTheDay } });
 
 		//Act
 		const guessInput = wrapper.find("input[type=text]");
@@ -19,7 +22,6 @@ describe("WordleBoard", () => {
 
 	test("a defeat message appears if the user makes a guess that is incorrect", async () => {
 		//Arrange
-		const wrapper = mount(WordleBoard, { props: { wordOfTheDay } });
 		//Act
 		const guessInput = wrapper.find("input[type=text]");
 		await guessInput.setValue("WRONG");
@@ -30,7 +32,6 @@ describe("WordleBoard", () => {
 
 	test("no end-of-game message appears if the user has not yet made a guess", async () => {
 		//Arrange
-		const wrapper = mount(WordleBoard, { props: { wordOfTheDay } });
 		//Act
 
 		//Assert
