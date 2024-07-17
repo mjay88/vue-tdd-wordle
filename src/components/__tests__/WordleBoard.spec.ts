@@ -42,7 +42,10 @@ describe("WordleBoard", () => {
 	});
 
 	test("If a word of the day provided does not have exactly 5 characters, a warning is emitted", async () => {
-		vi.spyOn(console, "warn");
+		// const spy = vi.spyOn(console, "warn");
+		// spy.mockImplementation(() => null);
+		console.warn = vi.fn();
+
 		mount(WordleBoard, { props: { wordOfTheDay: "FLY" } });
 
 		expect(console.warn).toHaveBeenCalled();
