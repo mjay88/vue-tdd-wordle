@@ -46,7 +46,7 @@ describe("WordleBoard", () => {
 
 	describe("Rules for defining the word of the day", () => {
 		test.each(["FLY", "tests", "QWERT"])(
-			"If '%s' a warning is emitted",
+			"If '%s' is provided a warning is emitted",
 			async (wordOfTheDay) => {
 				// const spy = vi.spyOn(console, "warn");
 				// spy.mockImplementation(() => null);
@@ -57,22 +57,6 @@ describe("WordleBoard", () => {
 				expect(console.warn).toHaveBeenCalled();
 			}
 		);
-
-		test("if the word of the day is not all in uppercase, a warning is emitted", async () => {
-			console.warn = vi.fn();
-
-			mount(WordleBoard, { props: { wordOfTheDay: "tests" } });
-
-			expect(console.warn).toHaveBeenCalled();
-		});
-
-		test("if the word of the day is not a real word, a warning is emitted", async () => {
-			console.warn = vi.fn();
-
-			mount(WordleBoard, { props: { wordOfTheDay: "QWERT" } });
-
-			expect(console.warn).toHaveBeenCalled();
-		});
 
 		test("no warning is emitted if the word of the day provided is a real uppercase English word with 5 characters", async () => {
 			console.warn = vi.fn();
